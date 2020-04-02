@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+    
+    <!-- 获取配置文件 -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!-- 1.配置数据库链接信息 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="maxActive" value="1" />
+        <property name="minIdle" value="1" />
+        <property name="removeAbandoned" value="true" />   
+		<!-- 超时时间；单位为秒。180秒=3分钟 -->   
+		<property name="removeAbandonedTimeout" value="180" />   
+		<!-- 关闭abanded连接时输出错误日志 -->   
+		<property name="logAbandoned" value="true" />   
+    </bean>
+    
+    <!-- 2.配置sqlsessionfactory -->
+    <bean id="" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 注入数据源 -->
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- 设置mybatis配置文件路径 -->
+        <property name="configLocation" value="classpath:mybaits/SqlMapConfig.xml"></property>
+    </bean>
+    
+    <!-- 3.配置mapper扫描器 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 设置扫描包路径 -->
+        <property name="basePackage" value="com.sele.db.mapper"></property>
+    </bean>
+    
+</beans>

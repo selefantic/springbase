@@ -1,0 +1,29 @@
+ext {
+	guavaVersion="28.0-jre"
+	iospringManVersion="1.0.8.RELEASE"
+    testngVersion = "7.0.0-beta7"
+    
+    springVersion = "5.2.1.RELEASE"
+    springbootVersion = "2.2.2.RELEASE"
+    springbootSecurityVersion="2.2.2.RELEASE"
+    undertowVersion="2.2.2.RELEASE"
+       	
+    springbootConfVersion = "2.2.1.RELEASE"
+    springCloudStarterNetflixEurekaServerVersion="2.2.1.RELEASE"
+    springCloudStarterNetflixEurekaClientVersion="2.2.1.RELEASE"
+        
+    jacksonDatabindVersion = "2.9.9"
+    jacksonAnnotationsVersion="2.9.0"
+    
+    lombokVersion="1.18.8"
+    
+    mysqlConnectorVersion="8.0.9-rc"
+    druidVersion="1.1.9"
+    mybatisSpringVersion="2.0.3"
+    mybatisVersion="3.5.3"
+    
+    swaggerVersion="2.9.2"
+    
+    compileJava.options.encoding = 'UTF-8'
+    compileTestJava.options.encoding = 'UTF-8'
+}

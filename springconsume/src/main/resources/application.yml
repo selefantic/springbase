@@ -1,0 +1,48 @@
+server:
+  port: 8763
+  ribbon:
+    eureka:
+      enabled: true
+    ServerListRefreshInterval: 1000
+  
+spring:
+  application:
+    name: eureka-client-service-c
+    
+info:
+  app:
+    name: springservice-c-8763
+  company:
+    name: www.sele.com
+  build:
+    artifactId: $project.artifactId$
+    version: $project.version$
+
+logging:
+  config: classpath:log4j2-dev.xml
+  level:
+    org.springframework.context.support.[PostProcessorRegistrationDelegate$BeanPostProcessorChecker]: WARN
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:123456@localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+    registryFetchIntervalSeconds: 30
+  server:
+    enable-self-preservation: false
+  instance:
+    leaseRenewalIntervalInSeconds: 30
+    leaseExpirationDurationInSeconds: 90
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: env,beans
+    health:
+      sensitive: false

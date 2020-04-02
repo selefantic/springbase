@@ -1,0 +1,29 @@
+server:
+  port: 8762
+  
+spring:
+  application:
+    name: eureka-client-service
+
+logging:
+  config: classpath:log4j2-dev.xml
+  level:
+    org.springframework.context.support.[PostProcessorRegistrationDelegate$BeanPostProcessorChecker]: WARN
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  server:
+    enable-self-preservation: false
+    
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: env,beans
+    health:
+      sensitive: false

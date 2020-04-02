@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sele.db.mapper.TStockAllMapper">
+  <resultMap id="BaseResultMap" type="com.sele.db.model.TStockAll">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="partionKey" jdbcType="INTEGER" property="partionkey" />
+    <result column="state_dt" jdbcType="VARCHAR" property="stateDt" />
+    <result column="stock_code" jdbcType="VARCHAR" property="stockCode" />
+    <result column="open" jdbcType="INTEGER" property="open" />
+    <result column="close" jdbcType="INTEGER" property="close" />
+    <result column="high" jdbcType="INTEGER" property="high" />
+    <result column="low" jdbcType="INTEGER" property="low" />
+    <result column="vol" jdbcType="BIGINT" property="vol" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="pre_close" jdbcType="INTEGER" property="preClose" />
+    <result column="amt_change" jdbcType="DECIMAL" property="amtChange" />
+    <result column="pct_change" jdbcType="DECIMAL" property="pctChange" />
+    <result column="report_time" jdbcType="DATE" property="reportTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, partionKey, state_dt, stock_code, open, close, high, low, vol, amount, pre_close, 
+    amt_change, pct_change, report_time, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.sele.db.model.TStockAllExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_stock_all
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insert" parameterType="com.sele.db.model.TStockAll">
+    insert into t_stock_all (id, partionKey, state_dt, 
+      stock_code, open, close, 
+      high, low, vol, amount, 
+      pre_close, amt_change, pct_change, 
+      report_time, create_time)
+    values (#{id,jdbcType=BIGINT}, #{partionkey,jdbcType=INTEGER}, #{stateDt,jdbcType=VARCHAR}, 
+      #{stockCode,jdbcType=VARCHAR}, #{open,jdbcType=INTEGER}, #{close,jdbcType=INTEGER}, 
+      #{high,jdbcType=INTEGER}, #{low,jdbcType=INTEGER}, #{vol,jdbcType=BIGINT}, #{amount,jdbcType=DECIMAL}, 
+      #{preClose,jdbcType=INTEGER}, #{amtChange,jdbcType=DECIMAL}, #{pctChange,jdbcType=DECIMAL}, 
+      #{reportTime,jdbcType=DATE}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sele.db.model.TStockAll">
+    insert into t_stock_all
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="partionkey != null">
+        partionKey,
+      </if>
+      <if test="stateDt != null">
+        state_dt,
+      </if>
+      <if test="stockCode != null">
+        stock_code,
+      </if>
+      <if test="open != null">
+        open,
+      </if>
+      <if test="close != null">
+        close,
+      </if>
+      <if test="high != null">
+        high,
+      </if>
+      <if test="low != null">
+        low,
+      </if>
+      <if test="vol != null">
+        vol,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="preClose != null">
+        pre_close,
+      </if>
+      <if test="amtChange != null">
+        amt_change,
+      </if>
+      <if test="pctChange != null">
+        pct_change,
+      </if>
+      <if test="reportTime != null">
+        report_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="partionkey != null">
+        #{partionkey,jdbcType=INTEGER},
+      </if>
+      <if test="stateDt != null">
+        #{stateDt,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null">
+        #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="open != null">
+        #{open,jdbcType=INTEGER},
+      </if>
+      <if test="close != null">
+        #{close,jdbcType=INTEGER},
+      </if>
+      <if test="high != null">
+        #{high,jdbcType=INTEGER},
+      </if>
+      <if test="low != null">
+        #{low,jdbcType=INTEGER},
+      </if>
+      <if test="vol != null">
+        #{vol,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="preClose != null">
+        #{preClose,jdbcType=INTEGER},
+      </if>
+      <if test="amtChange != null">
+        #{amtChange,jdbcType=DECIMAL},
+      </if>
+      <if test="pctChange != null">
+        #{pctChange,jdbcType=DECIMAL},
+      </if>
+      <if test="reportTime != null">
+        #{reportTime,jdbcType=DATE},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>
